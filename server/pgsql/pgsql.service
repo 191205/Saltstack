@@ -1,0 +1,19 @@
+[Unit]
+Description=Postgres
+Requires=docker.service
+After=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker stop pgsql
+ExecStartPre=-/usr/bin/docker rm pgsql
+ExecStart=/usr/bin/docker run --name pgsql \
+                              -p 127.0.0.1:5432:5432 \
+                              --mount type=bind,src=/srv/pgsql,dst=/data \
+                              -e POSTGRES_PASSWORD={{ pillar.synapse.pgsql_password }} \
+                              -e PGDATA=/data/data \
+                              postgres:11-alpine
+ExecStop=/usr/bin/docker stop pgsql
+ExecReload=/usr/bin/docker restart pgsql
+ 
+[Install]
+WantedBy=multi-user.target

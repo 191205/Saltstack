@@ -1,0 +1,14 @@
+#!/bin/sh
+if test -z "$1"; then
+    echo "usage:"
+    echo "\tinit <repo>"
+    exit 1
+fi
+
+if ls $1.git 2>/dev/null >/dev/null; then
+    echo "$1 already exists"
+    exit 2
+else
+    git init --bare $1.git >/dev/null
+    echo "$1 initialized"
+fi

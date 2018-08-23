@@ -1,0 +1,95 @@
+{# http://terminal.sexy json exports can be used #}
+
+{# base16-grayscale-dark #}
+{% set greyscale = {
+  "color": [
+    "#101010",
+    "#7c7c7c",
+    "#8e8e8e",
+    "#a0a0a0",
+    "#686868",
+    "#747474",
+    "#868686",
+    "#b9b9b9",
+    "#525252",
+    "#7c7c7c",
+    "#8e8e8e",
+    "#a0a0a0",
+    "#686868",
+    "#747474",
+    "#868686",
+    "#f7f7f7",
+  ],
+  "foreground": "#b9b9b9",
+  "background": "#101010",
+} %}
+
+{# base16-black-metal-immorta #}
+{% set metal_immortal = {
+  "color": [
+    "#000000",
+    "#5f8787",
+    "#7799bb",
+    "#556677",
+    "#888888",
+    "#999999",
+    "#aaaaaa",
+    "#c1c1c1",
+    "#333333",
+    "#5f8787",
+    "#7799bb",
+    "#556677",
+    "#888888",
+    "#999999",
+    "#aaaaaa",
+    "#c1c1c1"
+  ],
+  "foreground": "#c1c1c1",
+  "background": "#000000"
+} %}
+
+{# https://github.com/fenetikm/falcon #}
+{% set falcon = {
+  "color": [
+    "#000002",
+    "#ff4000",
+    "#598033",
+    "#ffbf00",
+    "#306cbf",
+    "#ff8000",
+    "#30bfa7",
+    "#d4d4d9",
+    "#0b0b1a",
+    "#ff794c",
+    "#85a663",
+    "#ffd966",
+    "#8fa3bf",
+    "#ffac59",
+    "#85ccc0",
+    "#fdfdff",
+  ],
+  "foreground": "#e1e1e6",
+  "background": "#0b0b1a",
+} %}
+
+{% set export = metal_immortal %}
+{% set c = {
+	"fg":  export["foreground"],
+	"bg":  export["background"],
+	"b0":  export["color"][0],
+	"b1":  export["color"][1],
+	"b2":  export["color"][2],
+	"b3":  export["color"][3],
+	"b4":  export["color"][4],
+	"b5":  export["color"][5],
+	"b6":  export["color"][6],
+	"b7":  export["color"][7],
+	"b8":  export["color"][8],
+	"b9":  export["color"][9],
+	"b10": export["color"][10],
+	"b11": export["color"][11],
+	"b12": export["color"][12],
+	"b13": export["color"][13],
+	"b14": export["color"][14],
+	"b15": export["color"][15],
+} %}

@@ -1,0 +1,2 @@
+{%- set space = pillar.digitalocean.spaces.xnr -%}
+xnr:{{ space.key }}:{{ space.secret }}

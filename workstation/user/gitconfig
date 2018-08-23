@@ -1,0 +1,6 @@
+[user]
+	name = Terry Kerr
+	email = t@xnr.ca
+
+[core]
+	editor = nvim

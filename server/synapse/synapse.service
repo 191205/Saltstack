@@ -1,0 +1,22 @@
+[Unit]
+Description=Synapse Homeserver
+Requires=docker.service
+After=docker.service
+
+[Service]
+ExecStartPre=-/usr/bin/docker stop synapse
+ExecStartPre=-/usr/bin/docker rm synapse
+ExecStart=/usr/bin/docker run --name synapse \
+                              --network host \
+                              --mount type=bind,src=/srv/synapse,dst=/data \
+                              --mount type=bind,src=/etc/letsencrypt,dst=/etc/letsencrypt,readonly \
+                              --mount type=bind,src=/etc/synapse,dst=/etc/synapse,readonly \
+                              -e SYNAPSE_CONFIG_PATH=/etc/synapse/synapse.yaml \
+                              -e UID=0 \
+                              -e GID=0 \
+                              matrixdotorg/synapse:v0.33.3
+ExecStop=/usr/bin/docker stop synapse
+ExecReload=/usr/bin/docker restart synapse
+ 
+[Install]
+WantedBy=multi-user.target

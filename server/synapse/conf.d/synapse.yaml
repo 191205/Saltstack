@@ -1,0 +1,171 @@
+tls_certificate_path: "/etc/letsencrypt/live/xnr.ca/fullchain.pem"
+tls_private_key_path: "/etc/letsencrypt/live/xnr.ca/privkey.pem"
+tls_dh_params_path: "/etc/synapse/dhparams.pem"
+no_tls: False
+tls_fingerprints: []
+
+## Server ##
+server_name: "mx.xnr.ca"
+pid_file: /tmp/synapse.pid
+# cpu_affinity: 0xFFFFFFFF
+web_client: False
+soft_file_limit: 0
+
+listeners:
+  - port: 8800
+    tls: false
+    bind_addresses: 
+      - "127.0.0.1"
+    type: http
+    x_forwarded: true
+    resources:
+      - names: [client]
+        compress: true
+      - names: [federation]
+        compress: false
+
+  - port: 8801
+    tls: true
+    bind_addresses:
+      - "::"
+    type: http
+    x_forwarded: False
+    resources:
+      - names: [federation]
+        compress: False
+
+# Database configuration
+database:
+  name: "psycopg2"
+  args:
+    user: postgres
+    password: {{ pillar.synapse.pgsql_password }}
+    host: 127.0.0.1
+    port: 5432
+
+# Number of events to cache in memory.
+event_cache_size: "10K"
+
+# A yaml python logging config file
+log_config: "/etc/synapse/log.yaml"
+
+## Ratelimiting ##
+rc_messages_per_second: 0.2
+rc_message_burst_count: 10.0
+federation_rc_window_size: 1000
+federation_rc_sleep_limit: 10
+federation_rc_sleep_delay: 500
+federation_rc_reject_limit: 50
+federation_rc_concurrent: 3
+
+# Directory where uploaded images and attachments are stored.
+media_store_path: "/data/media"
+uploads_path: "/data/uploads"
+max_upload_size: "16M"
+max_image_pixels: "16M"
+dynamic_thumbnails: false
+
+thumbnail_sizes:
+- width: 32
+  height: 32
+  method: crop
+- width: 96
+  height: 96
+  method: crop
+- width: 320
+  height: 240
+  method: scale
+- width: 640
+  height: 480
+  method: scale
+
+url_preview_enabled: True
+url_preview_ip_range_blacklist:
+  - '127.0.0.0/8'
+  - '10.0.0.0/8'
+  - '172.16.0.0/12'
+  - '192.168.0.0/16'
+  - '100.64.0.0/10'
+  - '169.254.0.0/16'
+  - '::1/128'
+  - 'fe80::/64'
+  - 'fc00::/7'
+
+url_preview_url_blacklist:
+  - username: '*'
+  - netloc: 'google.com'
+  - netloc: '*.google.com'
+  - netloc: '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$'
+
+max_spider_size: "10M"
+
+## Captcha ##
+recaptcha_public_key: "YOUR_PUBLIC_KEY"
+recaptcha_private_key: "YOUR_PRIVATE_KEY"
+enable_registration_captcha: False
+recaptcha_siteverify_api: "https://www.google.com/recaptcha/api/siteverify"
+
+## Turn ##
+turn_uris: []
+turn_shared_secret: "YOUR_SHARED_SECRET"
+#turn_username: "TURNSERVER_USERNAME"
+#turn_password: "TURNSERVER_PASSWORD"
+turn_user_lifetime: "1h"
+turn_allow_guests: True
+
+
+## Registration ##
+enable_registration: False
+registration_shared_secret: "{{ pillar.synapse.registration_shared_secret }}"
+bcrypt_rounds: 12
+allow_guest_access: False
+trusted_third_party_id_servers:
+    - matrix.org
+    - vector.im
+    - riot.im
+
+## Metrics ###
+enable_metrics: False
+report_stats: True
+
+
+## API Configuration ##
+room_invite_state_types:
+    - "m.room.join_rules"
+    - "m.room.canonical_alias"
+    - "m.room.avatar"
+    - "m.room.name"
+
+app_service_config_files: []
+macaroon_secret_key: "{{ pillar.synapse.macaroon_secret_key }}"
+
+# Used to enable access token expiration.
+expire_access_token: False
+form_secret: "{{ pillar.synapse.form_secret }}"
+
+## Signing Keys ##
+signing_key_path: "/etc/synapse/signing.key"
+
+old_signing_keys: {}
+#  "ed25519:auto":
+#    # Base64 encoded public key
+#    key: "The public part of your old signing key."
+#    # Millisecond POSIX timestamp when the key expired.
+#    expired_ts: 123456789123
+
+key_refresh_interval: "1d" # 1 Day.
+
+perspectives:
+  servers:
+    "matrix.org":
+      verify_keys:
+        "ed25519:auto":
+          key: "Noi6WqcDj0QmPxCNQqgezwTlBKrfqehY1u2FyWP9uYw"
+
+password_config:
+   enabled: true
+
+# Whether to allow non server admins to create groups on this server
+enable_group_creation: false
+# group_creation_prefix: "unofficial/"
+# vim:ft=yaml
