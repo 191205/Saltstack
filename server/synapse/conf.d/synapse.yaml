@@ -1,11 +1,11 @@
-tls_certificate_path: "/etc/letsencrypt/live/xnr.ca/fullchain.pem"
-tls_private_key_path: "/etc/letsencrypt/live/xnr.ca/privkey.pem"
+tls_certificate_path: "/etc/letsencrypt/live/oefd.ca/fullchain.pem"
+tls_private_key_path: "/etc/letsencrypt/live/oefd.ca/privkey.pem"
 tls_dh_params_path: "/etc/synapse/dhparams.pem"
-no_tls: False
+no_tls: True
 tls_fingerprints: []
 
 ## Server ##
-server_name: "mx.xnr.ca"
+server_name: "oefd.ca"
 pid_file: /tmp/synapse.pid
 # cpu_affinity: 0xFFFFFFFF
 web_client: False
@@ -24,22 +24,12 @@ listeners:
       - names: [federation]
         compress: false
 
-  - port: 8801
-    tls: true
-    bind_addresses:
-      - "::"
-    type: http
-    x_forwarded: False
-    resources:
-      - names: [federation]
-        compress: False
-
 # Database configuration
 database:
   name: "psycopg2"
   args:
     user: postgres
-    password: {{ pillar.synapse.pgsql_password }}
+    password: {{ pillar.pgsql.password }}
     host: 127.0.0.1
     port: 5432
 
@@ -61,7 +51,7 @@ federation_rc_concurrent: 3
 # Directory where uploaded images and attachments are stored.
 media_store_path: "/data/media"
 uploads_path: "/data/uploads"
-max_upload_size: "16M"
+max_upload_size: "32M"
 max_image_pixels: "16M"
 dynamic_thumbnails: false
 

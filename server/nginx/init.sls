@@ -7,14 +7,16 @@ webserver:
     - pkgs:
       - nginx
   git.latest:
-    - name: /srv/git/xnr.git
-    - target: /srv/http/xnr
+    - name: /srv/git/oefd.ca.git
+    - target: /srv/http/oefd.ca
   file.managed:
     - names:
       - /etc/nginx/nginx.conf:
         - source: salt://{{ slspath }}/nginx.conf
       - /etc/nginx/conf.d/ssl.conf:
         - source: salt://{{ slspath }}/ssl.conf
+      - /etc/nginx/mime.types:
+        - source: salt://{{ slspath }}/mime.types
   service.running:
     - name: nginx
     - enable: True

@@ -2,6 +2,9 @@ updates:
   pkg.uptodate:
     - refresh: True
 
+/etc/motd:
+  file.absent
+
 sshd:
   file.managed:
     - name: /etc/ssh/sshd_config
