@@ -3,7 +3,7 @@ synapse:
     - name: /srv/synapse
   docker_image.present:
     - name: matrixdotorg/synapse
-    - tag: v0.33.3
+    - tag: v0.33.4
 
 synapse config:
   file.recurse:

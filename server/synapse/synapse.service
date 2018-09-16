@@ -14,7 +14,7 @@ ExecStart=/usr/bin/docker run --name synapse \
                               -e SYNAPSE_CONFIG_PATH=/etc/synapse/synapse.yaml \
                               -e UID=0 \
                               -e GID=0 \
-                              matrixdotorg/synapse:v0.33.3.1
+                              matrixdotorg/synapse:v0.33.4
 ExecStop=/usr/bin/docker stop synapse
 ExecReload=/usr/bin/docker restart synapse
  
