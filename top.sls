@@ -1,5 +1,5 @@
 base:
-  'owl.xnr.ca':
+  'owl.oefd.ca':
     - workstation
-  'auk.xnr.ca':
+  'auk.oefd.ca':
     - server
