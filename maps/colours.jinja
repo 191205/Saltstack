@@ -1,5 +1,29 @@
 {# http://terminal.sexy json exports can be used #}
 
+{# base16-github #}
+{% set github = {
+  "color": [
+    "#ffffff",
+    "#ed6a43",
+    "#183691",
+    "#795da3",
+    "#795da3",
+    "#a71d5d",
+    "#183691",
+    "#333333",
+    "#969696",
+    "#ed6a43",
+    "#183691",
+    "#795da3",
+    "#795da3",
+    "#a71d5d",
+    "#183691",
+    "#ffffff",
+  ],
+  "foreground": "#000000",
+  "background": "#ffffff",
+} %}
+
 {# base16-grayscale-dark #}
 {% set greyscale = {
   "color": [
@@ -72,7 +96,7 @@
   "background": "#0b0b1a",
 } %}
 
-{% set export = metal_immortal %}
+{% set export = github %}
 {% set c = {
 	"fg":  export["foreground"],
 	"bg":  export["background"],

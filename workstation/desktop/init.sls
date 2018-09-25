@@ -12,7 +12,6 @@ desktop:
       - pavucontrol
       - arc-gtk-theme
       - arc-icon-theme
-      - firefox
       - termite
       - sxiv
       - acpi

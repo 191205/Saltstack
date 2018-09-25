@@ -54,9 +54,10 @@ set signcolumn=yes
 set termguicolors
 let g:python3_host_prog = '/usr/bin/python3'
 
-colorscheme base16-black-metal-immortal
-let g:falcon_lightline = 1
-let g:lightline = { 'colorscheme': 'base16_grayscale_dark' }
+set t_Co=256
+set background=light
+autocmd BufReadPre,BufNewFile * colorscheme base16-github
+let g:lightline = { 'colorscheme': 'PaperColor_light' }
 
 filetype plugin indent on
 syntax enable

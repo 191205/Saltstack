@@ -1,6 +1,8 @@
 [user]
 	name = Terry Kerr
 	email = root@oefd.ca
+	signkey = 0EFD356B9AD584F17E33BFED149DE4AF80625676
 
 [core]
 	editor = nvim
+
